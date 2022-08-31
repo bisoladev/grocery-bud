@@ -12,7 +12,11 @@ const List = ({ items, removeItem }) => {
               <button className="edit-btn" type="button">
                 <FaEdit />
               </button>
-              <button className="delete-btn" type="button">
+              <button
+                className="delete-btn"
+                type="button"
+                onClick={() => removeItem(id)}
+              >
                 <FaTrash />
               </button>
             </div>
