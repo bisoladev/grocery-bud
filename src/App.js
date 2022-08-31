@@ -10,7 +10,11 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   //This reflects which item we are actually editing
   const [editID, setEditID] = useState(null);
-  const [alert, setAlert] = useState({ show: true, msg: "Hello World", type: "success" });
+  const [alert, setAlert] = useState({
+    show: false,
+    msg: "",
+    type: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +22,7 @@ function App() {
     //If the user passes in an empty string
     if (!name) {
       //display alert
+      showAlert(true, "danger", "Please enter value");
     } else if (name && isEditing) {
       //deal with edit
     } else {
@@ -27,10 +32,14 @@ function App() {
       setName("");
     }
   };
+
+  const showAlert = (show = false, type = "", msg = "") => {
+    setAlert({ show, type, msg });
+  };
   return (
     <section className="section-center">
       <form className="grocery-form" onSubmit={handleSubmit}>
-        {alert.show && <Alert {...alert}/>}
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <h3>Grocery Bud</h3>
         <div className="form-control">
           <input
